@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Parking
+namespace ParkingCore
 {
-    internal class Transaction
+    public class Transaction
     {
         public DateTime Date_Time { get; set; }
 

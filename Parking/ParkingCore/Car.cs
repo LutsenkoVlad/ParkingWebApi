@@ -1,7 +1,7 @@
-﻿using Parking.Enums;
+﻿using ParkingCore.Enums;
 using System;
 
-namespace Parking
+namespace ParkingCore
 {
     public class Car
     {
@@ -15,6 +15,11 @@ namespace Parking
         {
             if (money > 0)
                 Balance += money;
+        }
+
+        public Car()
+        {
+            Id = Guid.NewGuid();
         }
 
         public Car(decimal balance, CarType carType)

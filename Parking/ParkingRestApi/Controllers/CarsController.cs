@@ -4,34 +4,54 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ParkingCore;
+using ParkingCore.Interfaces;
 
 namespace ParkingRestApi.Controllers
 {
     [Route("api/[controller]")]
     public class CarsController : Controller
     {
+        private readonly IParking _parking;
+        public CarsController(IParking parking) => _parking = parking;
+
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok();
+            return Json(_parking.GetCars());
         }
 
-        [HttpGet("{guid}")]
-        public IActionResult Get(Guid guid)
+        [HttpGet("{carId}")]
+        public IActionResult Get(Guid carId)
         {
-            return Ok();
+            return Json(_parking.GetCar(carId));
         }
 
         [HttpPost]
-        public IActionResult Get(Car car)
+        public IActionResult Post(Car car)
         {
-            return Ok();
+            try
+            {
+                _parking.AddCar(car);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete]
-        public IActionResult Delete()
+        public IActionResult Delete(Guid carId)
         {
-            return Ok();
+            try
+            {
+                _parking.RemoveCar(carId);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

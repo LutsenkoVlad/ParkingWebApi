@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ParkingCore.Interfaces
 {
-    interface ISettings
+    public interface ISettings
     {
         /// <summary>
         /// Every Timeout seconds charges money for parking space
@@ -26,6 +26,10 @@ namespace ParkingCore.Interfaces
         /// </summary>
         decimal Fine { get; }
 
+        string LogFilePath { get; set; }
+
+        int LogTimeout { get; set; }
+
         /// <summary>
         /// Set settings for parking data
         /// </summary>
@@ -33,6 +37,7 @@ namespace ParkingCore.Interfaces
         /// <param name="parkingSpace">Amount of parking spaces</param>
         /// <param name="fine">Coefficient of fine</param>
         /// <param name="timeout">Every Timeout seconds charges money for parking space</param>
-        void SetSettings(Dictionary<CarType, decimal> prices, int parkingSpace, decimal fine, int timeout = 3);
+        void SetSettings(Dictionary<CarType, decimal> prices, int parkingSpace,
+                           decimal fine, string logFilePath, int timeout = 3, int logTimeout = 60);
     }
 }

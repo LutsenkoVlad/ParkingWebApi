@@ -1,14 +1,14 @@
-﻿using Parking.Enums;
-using Parking.Interfaces;
+﻿using ParkingCore.Enums;
+using ParkingCore.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace Parking
+namespace ParkingCore
 {
     /// <summary>
     /// Customizing parking data
     /// </summary>
-    internal class ParkingSettings : ISettings
+    public class ParkingSettings : ISettings
     {
         /// <summary>
         /// Every Timeout seconds charges money for parking space
@@ -30,6 +30,10 @@ namespace Parking
         /// </summary>
         public decimal Fine { get; private set; }
 
+        public string LogFilePath { get; set; }
+
+        public int LogTimeout { get; set; }
+
         private static readonly Lazy<ParkingSettings> lazy = new Lazy<ParkingSettings>(() => new ParkingSettings());
 
         public static ParkingSettings Instance => lazy.Value;
@@ -44,12 +48,15 @@ namespace Parking
         /// <param name="parkingSpace">Amount of parking spaces</param>
         /// <param name="fine">Coefficient of fine</param>
         /// <param name="timeout">Every Timeout seconds charges money for parking space</param>
-        public void SetSettings(Dictionary<CarType, decimal> prices, int parkingSpace, decimal fine, int timeout = 3)
+        public void SetSettings(Dictionary<CarType, decimal> prices, int parkingSpace,
+                                decimal fine, string logFilePath, int timeout = 3, int logTimeout = 60)
         {
             Prices = prices;
             ParkingSpace = parkingSpace;
             Fine = fine;
             Timeout = timeout;
+            LogFilePath = logFilePath;
+            LogTimeout = logTimeout;
         }
     }
 }

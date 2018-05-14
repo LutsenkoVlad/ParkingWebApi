@@ -1,0 +1,28 @@
+﻿{
+  "Cars": [
+    {
+      "Balance": 100,
+      "CarType": 0
+    },
+    {
+      "Balance": 100,
+      "CarType": 1
+    },
+    {
+      "Balance": 100,
+      "CarType": 2
+    },
+    {
+      "Balance": 100,
+      "CarType": 3
+    },
+    {
+      "Balance": 100,
+      "CarType": 0
+    },
+    {
+      "Balance": 100,
+      "CarType": 2
+    }
+  ]
+}
