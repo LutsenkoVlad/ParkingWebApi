@@ -7,7 +7,7 @@ using ParkingCore.Interfaces;
 
 namespace ParkingRestApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class TransactionsController : Controller
     {
         private readonly IParking _parking;
@@ -19,7 +19,8 @@ namespace ParkingRestApi.Controllers
             return Json(_parking.ShowLog());
         }
 
-        [HttpGet(Name = "GetTransactionsForLastMinute")]
+        [HttpGet]
+        [Route("GetTransactionsForLastMinute")]
         public IActionResult GetTransactionsForLastMinute()
         {
             return Json(_parking.GetTransactionsForLastMinute());
