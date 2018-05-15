@@ -22,7 +22,12 @@ namespace ParkingRestApi
         {
             Configuration = configuration;
             settings = ParkingSettings.Instance;
-            settings.SetSettings(SetSettings(), 10, 5, "Transactions.log");
+            IConfigurationSection section = Configuration.GetSection("ParkingSettings");
+            settings.SetSettings(AddPricesForCar(), section.GetValue<int>("ParkingSpace"),
+                                                    section.GetValue<int>("ParkingFine"),
+                                                    section.GetValue<string>("LogFilePath"),
+                                                    section.GetValue<int>("Timeout"),
+                                                    section.GetValue<int>("LogTimeout"));
         }
 
         public IConfiguration Configuration { get; }
@@ -45,7 +50,7 @@ namespace ParkingRestApi
             app.UseMvc();
         }
 
-        private static Dictionary<CarType,decimal> SetSettings()
+        private static Dictionary<CarType,decimal> AddPricesForCar()
         {
             var prices = new Dictionary<CarType, decimal>();
             prices.Add(CarType.Passenger, 5);
