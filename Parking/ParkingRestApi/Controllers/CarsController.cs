@@ -27,20 +27,20 @@ namespace ParkingRestApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Car car)
+        public IActionResult Post([FromBody]Car car)
         {
             try
             {
                 _parking.AddCar(car);
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{carId}")]
         public IActionResult Delete(Guid carId)
         {
             try
